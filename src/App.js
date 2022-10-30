@@ -70,7 +70,7 @@ export default function App() {
     const txnParams = {
       from: publicAddress,
       to: process.env.REACT_APP_WALLET,
-      value: web3.utils.toWei("1.5", "ether"),
+      value: web3.utils.toWei(REACT_APP_COFFEE_PRICE, "ether"),
       gasPrice: gasPrice
     };
     return web3.eth
@@ -129,7 +129,7 @@ export default function App() {
           />
 
           <button onClick={showWallet} className="button-row">
-            Wallet Details
+            Magic Wallet
           </button>
           <button onClick={sendTx} className="button-row">
             Buy me a coffee
