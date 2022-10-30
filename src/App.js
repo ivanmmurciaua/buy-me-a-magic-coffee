@@ -70,7 +70,7 @@ export default function App() {
     const txnParams = {
       from: publicAddress,
       to: process.env.REACT_APP_WALLET,
-      value: web3.utils.toWei(REACT_APP_COFFEE_PRICE, "ether"),
+      value: web3.utils.toWei(process.env.REACT_APP_COFFEE_PRICE, "ether"),
       gasPrice: gasPrice
     };
     return web3.eth
