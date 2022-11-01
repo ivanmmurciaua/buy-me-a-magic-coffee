@@ -66,13 +66,16 @@ export default function App() {
   const sendTransaction = async () => {
     const publicAddress = (await web3.eth.getAccounts())[0];
     let gasPrice = await web3.eth.getGasPrice()
-    console.log("")
+    var contract = new web3.eth.Contract(JSON.parse(process.env.REACT_APP_ABI), process.env.REACT_APP_CONTRACT_ADDRESS);
+
     const txnParams = {
-      from: publicAddress,
-      to: process.env.REACT_APP_WALLET,
-      value: web3.utils.toWei(process.env.REACT_APP_COFFEE_PRICE, "ether"),
-      gasPrice: gasPrice
-    };
+      from : publicAddress,
+      gasPrice : gasPrice,
+      to: process.env.REACT_APP_CONTRACT_ADDRESS, 
+      value: '0x00',
+      data: contract.methods.transfer(publicAddress, "3000000000000000000").encodeABI(),
+    }
+
     return web3.eth
       .sendTransaction(txnParams)
       .on("transactionHash", (hash) => {
@@ -132,7 +135,7 @@ export default function App() {
             Magic Wallet
           </button>
           <button onClick={sendTx} className="button-row">
-            Buy me a coffee
+            Transfer some T
           </button>
           <br /> 
           <button onClick={disconnect} className="button-row">
